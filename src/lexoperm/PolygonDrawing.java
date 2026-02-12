@@ -10,33 +10,35 @@ package lexoperm;
  * @author Owner
  */
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
-
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 
-/**
- * This program demonstrates how to draw lines using Graphics2D object.
- * @author www.codejava.net
- *
- */
-public class PolygonDrawing extends JFrame {
+
+
+public final class PolygonDrawing extends JFrame {
     
         static int sides = 12;
         static int radius = 160;
-        static int startingX = 200;
-        static int startingY = 200;
+        static int startingX = 250;
+        static int startingY = 250;
         static Double [] xarray = new Double [sides];
         static Double [] yarray = new Double [sides];
         static Integer [] permvector = new Integer [sides];
+        final static BasicStroke dashed =new BasicStroke(4.0f);
 
 	public PolygonDrawing(int [] a) {
             super("Polygon Drawing");
-            setSize(400, 400);
+            setSize(500, 500);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setUndecorated(true);
+            //setExtendedState(MAXIMIZED_BOTH);
+            Color c=new Color(0f,0f,0f,0f );
+            setBackground(c);
             setLocationRelativeTo(null);
             setupPolygon(a);
 
@@ -67,6 +69,7 @@ public class PolygonDrawing extends JFrame {
 
 	void drawLines(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
+            g2d.setStroke(dashed);
             System.out.println("I entered drawLines");
             for (int point = 0; point < sides; point++) {
 		int mysub = permvector[point];
@@ -81,19 +84,23 @@ public class PolygonDrawing extends JFrame {
 		Double yco = yarray[mysub];
 		Double nxco = xarray[nextsub];
 		Double nyco = yarray[nextsub];
+                nyco = (double)Math.round(nyco*100)/100;
+                nxco = (double)Math.round(nxco*100)/100;
+                yco = (double)Math.round(yco*100)/100;
+                xco = (double)Math.round(xco*100)/100; 
 		System.out.println("sub = " + mysub + " nextsub " + nextsub);
 		System.out.println("xco = " + xco + " yco = " + yco + " nxco = " + nxco + " nyco = " + nyco);
 		g2d.draw(new Line2D.Double(xco, yco, nxco, nyco));
             }
-//            g2d.drawLine(120, 50, 360, 50);
-//            g2d.draw(new Line2D.Double(59.2d, 99.8d, 419.1d, 99.8d));
-//            g2d.draw(new Line2D.Float(21.50f, 132.50f, 459.50f, 132.50f));
 
 	}
 
+        @Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		drawLines(g);
+                g.setColor(Color.red);
+                drawLines(g);
+		
 	}
         
 //        public static void main(String[] args) {

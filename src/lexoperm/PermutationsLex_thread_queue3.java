@@ -2,52 +2,11 @@ package lexoperm;
 
 
 import java.util.Random;
-import java.awt.*;
-import javax.swing.*;
 import org.jfugue.*;
 
 
 
 public class PermutationsLex_thread_queue3 {
-
-    public static void show(int[] a) {
-        JFrame frame = new JFrame ();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel subPanel = new JPanel();
-        subPanel.setBackground (Color.pink);
-        subPanel.setPreferredSize (new Dimension(250,200));
-        for (int i = 0; i < a.length; i++) {
-            switch (a[i])
-            {
-                case (0): subPanel.setBackground(Color.LIGHT_GRAY);
-                case (1): subPanel.setBackground(Color.white);
-                case (2): subPanel.setBackground(Color.pink);
-                case (3): subPanel.setBackground(Color.red);
-                case (4): subPanel.setBackground(Color.pink);
-                case (5): subPanel.setBackground(Color.yellow);
-                case (6): subPanel.setBackground(Color.pink);
-                case (7): subPanel.setBackground(Color.blue);
-                case (8): subPanel.setBackground(Color.pink);
-                case (9): subPanel.setBackground(Color.cyan);
-                case (10): subPanel.setBackground(Color.pink);
-                case (11): subPanel.setBackground(Color.gray);
-            }   
-        frame.getContentPane().add(subPanel);
-        frame.pack();
-        frame.setVisible(true);
-          // try {
-          //     frame.wait(50);
-         //  } catch (InterruptedException ex) {
-          //    Logger.getLogger(PermutationsLex_thread_queue2.class.getName()).log(Level.SEVERE, null, ex);
-        //    }
-        //for (int j = 0; i < 6000; i++) { 
-        //    JLabel label1 = new JLabel ("Question authority,");
-      //   subPanel.add (label1);
-       // }
-
-        }
-        frame.dispose(); 
-    } 
 
     public static void swap(int[] a, int i, int j) {
         int temp = a[i];
@@ -87,6 +46,7 @@ public class PermutationsLex_thread_queue3 {
            }
         }
 
+        @Override
         public void run() {
             // initialize permutation
             int side_limit = 12;
@@ -105,6 +65,7 @@ public class PermutationsLex_thread_queue3 {
                 System.out.println();
                 PolygonDrawing myp = new PolygonDrawing(a);
                 myp.setVisible(true);
+                //while (myp.isShowing()==false) System.out.println("Wait");
                 Pattern jpattern = new Pattern();
                 jpattern.addElement(new Tempo(440));
                 byte instbyte = 71;
@@ -135,30 +96,28 @@ public class PermutationsLex_thread_queue3 {
         }//end method Run
     }//end class Perm
 
-    static class cubes implements Runnable {
+//    static class cubes implements Runnable {
+//
+//        public cubes(){
+//
+//        }
+//        public void start ()
+//        {
+//         //  System.out.println("Starting permutations " );
+//           if (tperm2 == null)
+//           {
+//              tperm2 = new Thread (this);
+//              tperm2.start ();
+//           }
+//        }
+//        
+//        private Thread tperm2;
+//        
+//        @Override
+//        public void run() {
+//            //System.out.println("beautiful feet beautiful soup");
+//        }
+//
+//    }//end cubes
 
-        public cubes(){
-
-        }
-        public void start ()
-        {
-         //  System.out.println("Starting permutations " );
-           if (tperm2 == null)
-           {
-              tperm2 = new Thread (this);
-              tperm2.start ();
-           }
-        }
-        private Thread tperm2;
-        public void run() {
-            System.out.println("beautiful feet beautiful soup");
-            //new PolygonDrawing().setVisible(true);
-        }
-
-    }//end cubes
-
-}//end PermutationsLex_thread_queue2.java
-
-
-
-
+}//end PermutationsLex_thread_queue3.java
